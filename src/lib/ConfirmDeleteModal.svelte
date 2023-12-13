@@ -3,6 +3,7 @@
     export let nodeCount = 0;
     export let confirmDelete = () => {};
     export let cancelDelete = () => {};
+    export let nodeTitle;
 </script>
 
 {#if isOpen && nodeCount > 0}
@@ -13,7 +14,7 @@
             <div class="modal-content text-left">
 
 
-                <p class='p-4'>Delete this node and its <span class='font-bold'>{nodeCount}</span> child nodes?</p>
+                <p class='p-4'>Delete "{nodeTitle}" and its <span class='font-bold'>{nodeCount}</span> sub-nodes?</p>
 
                 <div class="flex w-full justify-between">
                     <button class="bg-neutral-200 w-full py-1" on:click={cancelDelete}>Cancel</button>

@@ -3,6 +3,10 @@
     export let body = '';
     export let id = '';
     export let close = () => {};
+    export let color = 'white';
+    export let updateColor = () => {};
+
+    const colors = ['neutral-200', 'red-100', 'orange-100', 'yellow-100', 'green-100', 'cyan-100', 'blue-100', 'purple-100'];
 
     import { nodeList } from "../store.js";
 
@@ -54,22 +58,29 @@
 
 </script>
 
-<button class="modal bg-gray-900 bg-opacity-50 absolute top-0 left-0 w-full h-full flex items-center justify-center" on:click={close} on:keydown={esc}>
-    <button class="modal-content flex flex-col justify-between overflow-auto relative min-w-[20vw] bg-white" on:click|stopPropagation on:keydown={esc}>
+<button class="z-10 modal bg-gray-900 bg-opacity-50 absolute top-0 left-0 w-full h-full flex items-center justify-center" on:click={close} on:keydown={esc}>
+    <button class="modal-content flex flex-col justify-between overflow-auto relative min-w-[20vw] bg-{color}" on:click|stopPropagation on:keydown={esc}>
+        <div class="flex w-full h-16">
+            {#each colors as colorOption (colorOption)}
+                <button class="w-full bg-{colorOption}" on:click={() => updateColor(colorOption)}></button>
+            {/each}
+            
+        </div>
         <div>
         {#if !isEditing}
             <button class="text-3xl px-6 mt-4 focus:outline-none text-left underline underline-offset-8 decoration-2 cursor-pointer" on:click={startEditing} on:keydown={esc}>{text}</button>
         {:else}
-            <input class="text-3xl px-6 mt-4 focus:outline-none text-left underline underline-offset-8 decoration-2 cursor-text" type='text' bind:value={tempText} on:blur={saveChanges} on:keydown={handleKeydown} />
+            <input class="text-3xl px-6 mt-4 focus:outline-none text-left underline underline-offset-8 decoration-2 cursor-text bg-{color}" type='text' bind:value={tempText} on:blur={saveChanges} on:keydown={handleKeydown} />
         {/if}
         <div class="flex flex-col h-full justify-between gap-4">
             {#if !isEditingBody}
                 <button class="cursor-pointer focus:outline-none px-6 my-2" on:click={startEditingBody}>{body}</button>
             {:else}
-                <textarea rows="6" class="px-6 my-2 focus:outline-none h-full w-full overflow-visible" bind:value={tempBody} on:blur={saveChanges}></textarea>
+                <textarea rows="6" class="px-6 my-2 focus:outline-none h-full w-full overflow-visible bg-{color}" bind:value={tempBody} on:blur={saveChanges}></textarea>
             {/if}
         </div>
-        <button on:click={close} class='bg-neutral-200 py-2 w-full'>Close</button>
+
+        <button on:click={close} class='bg-gray-900 bg-opacity-20 py-2 w-full'>Close</button>
         </div>
     </button>
 </button>
