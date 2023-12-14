@@ -5,6 +5,17 @@
 
     import { nodeList } from "../store.js";
 
+    let showDesc = false;
+
+    function openDesc() {
+        showDesc = true;
+    }
+
+    function closeDesc() {
+        showDesc = false;
+    }
+
+
     let nodes = [];
 
     const unsubscribe = nodeList.subscribe(value => {
@@ -61,7 +72,11 @@
 <div class="bg-neutral-800 min-h-screen absolute min-w-full flex ">
 
     <div class="w-fit mx-auto bg-neutral-100 my-20 overflow-auto">
-        <span class="text-sm text-left flex pt-2 bg-neutral-200 pb-2 justify-left pl-3">Created by&nbsp;<a href="https://sahir.nl" class="underline">Sahir</a></span>
+        <div class="flex justify-between bg-neutral-200 py-2 px-3">
+
+            <span class="text-sm text-left flex">Created by&nbsp;<a href="https://sahir.nl" class="underline">Sahir</a></span>
+            <span class="text-sm text-left flex cursor-pointer" on:click={openDesc}>About this tool</span>
+        </div>
         <h1 class="text-3xl px-12 pt-9  text-center">Hierarchical note-taking </h1>
         <p class="text-center px-12 text-sm mt-2"> Tip - use colors as a second organizational dimension.</p>
         <p class="text-center px-12 text-sm "> Tip - add "sideways" for faster categories.</p>
@@ -83,3 +98,26 @@
         </div>    
     </div>
 </div>
+
+{#if showDesc}
+
+<div class="absolute top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center" on:click={closeDesc}>
+    <div class="bg-white max-w-md  p-6 m-20" on:click|stopPropagation>
+        <h1 class="text-3xl">Hierarchical Thinking</h1>
+        <p class="text-md mt-2 leading-10">This is my favourite way of: </p>
+        <ul class="list-none mx-4 list-inside text-sm leading-5">
+            <li>brainstorming</li>
+            <li>taking notes</li>
+            <li>learning new skills</li>
+            <li>planning essays</li>
+            <li>revising for tests</li>
+            <li>planning projects</li>
+            <li>and goal setting.</li>
+        </ul>
+        <hr class="my-4" />
+        <p class="text-md ">I like to keep the most important concepts on the left, and add categories to the right. I hope it helps you make something amazing :)</p>
+        <p class="leading-10 text-right"> - Sahir</p>
+        <button class="bg-gray-900 bg-opacity-20 py-2 w-full mt-2" on:click={closeDesc}>Close</button>
+    </div>              
+</div>
+{/if}
