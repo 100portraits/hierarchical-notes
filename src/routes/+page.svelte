@@ -115,7 +115,7 @@
             <li>and goal setting.</li>
         </ul>
         <hr class="my-4" />
-        <p class="text-md ">I like to keep the most important concepts on the left, and add categories to the right. I hope it helps you make something amazing :)</p>
+        <p class="text-md ">I made this quickly as a tool for myself - let me know what kind of things you'd like to see added. I like to keep the most important concepts on the left, and add categories to the right. I hope it helps you make something amazing :)</p>
         <p class="leading-10 text-right"> - Sahir</p>
         <button class="bg-gray-900 bg-opacity-20 py-2 w-full mt-2" on:click={closeDesc}>Close</button>
     </div>              
